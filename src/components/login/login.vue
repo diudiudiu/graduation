@@ -1,6 +1,10 @@
 <template>
   <div id="login">
-    <div class="logo">
+    <div 
+      class="logo"
+      :class="logoAnimated? 'logo-animated': ''"
+      @animationend="logoAnimated = false"
+      >
       <img src="@img/login-logo.jpg" alt="logo">
     </div>
     <div 
@@ -8,7 +12,7 @@
       :class="loginStatus? 'login':'register'"
       >
       <div 
-        v-if="loginStatus"
+        v-if="loginTextStatus"
         class="tab-login">
         <form>
           <p>登录</p>
@@ -45,7 +49,8 @@
       </div>
       <div 
         class="tab-register"
-        v-if="!loginStatus">
+        v-else
+        >
         <form>
           <p>注册</p>
           <div class="input-group">
@@ -98,12 +103,18 @@ export default {
         password: '',
       },
       passwordAgain: '',
-      loginStatus: true
+      loginStatus: true,
+      logoAnimated: true,
+      loginTextStatus: true
     }
   },
   methods: {
     goRegister(){
       this.loginStatus = !this.loginStatus
+      setTimeout( ()=> {
+        this.loginTextStatus = !this.loginTextStatus
+      },500)
+      this.logoAnimated = true
     }
   }
 }
@@ -155,12 +166,16 @@ $semidark: rgba(68, 160, 179, .5);
       width: .8rem;
     }
   }
+  .logo-animated{
+    animation: logoAnimated 1s forwards ease-in-out;
+  }
   a{
     color: $primary;
     text-decoration: none;
     border-bottom: 1px dashed $semidark;
     padding: .02rem 0;
     font-weight: 700;
+    cursor: pointer;
   }
   .tab{
     transition: all 1s;
@@ -206,6 +221,7 @@ $semidark: rgba(68, 160, 179, .5);
     .link{
       float: right;
       margin-right: .07rem;
+      cursor: pointer;
     }
   }
   .submit{
@@ -228,7 +244,18 @@ $semidark: rgba(68, 160, 179, .5);
     font-weight: 700;
     margin-top: .2rem;
     color: $semidark;
+  }
 
+  @keyframes logoAnimated {
+    0% {
+      transform: translate(-50%,-50%);
+    }
+    50% {
+      transform: translate(-50%,calc(-50% - 1.2rem));
+    }
+    100% {
+      transform: translate(-50%,-50%);
+    }
   }
 
 </style>
