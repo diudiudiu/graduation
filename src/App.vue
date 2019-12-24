@@ -1,15 +1,19 @@
 <template>
   <div id="app">
-    <login></login>
+    <!-- <login></login> -->
+    <json-style></json-style>
   </div>
 </template>
 
 <script>
-import login from './components/login/login'
+// import login from './components/login/login'
+import jsonStyle from './components/blog-list/json-style'
+
 export default {
   name: 'app',
   components: {
-    login
+    // login,
+    jsonStyle
   }
 }
 </script>
