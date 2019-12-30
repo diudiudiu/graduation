@@ -11,20 +11,10 @@
         <div v-for="(item,index) in list" :key="index" class="list-item">
           <span class="brackets">{</span>
           <p class="item-title">
-            title: "
-            <a href="item.id">
-              {{ item.title }}
-              <span class="text-line"></span>
-            </a>
-            ",
+            title: "<a href="item.id">{{ item.title }}<span class="text-line"></span></a>",
           </p>
           <p class="item-introduce">
-            introduce: "
-            <a href="item.id">
-              {{ item.introduce }}
-              <span class="text-line"></span>
-            </a>
-            "
+            introduce: "<a href="item.id">{{ item.introduce }}<span class="text-line"></span></a>"
           </p>
           <span class="brackets-back">
             }
@@ -35,8 +25,7 @@
       <div v-if="notes.length!==0" class="array">
         const notes = [
         <p v-for="(item,index) in notes" :key="index">
-          '{{ item.title }}'
-          <span v-if="index !== list.length-1">,</span>
+          '{{ item.title }}'<span v-if="index !== list.length-1">,</span>
         </p>]
       </div>
     </div>

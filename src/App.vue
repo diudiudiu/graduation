@@ -1,19 +1,23 @@
 <template>
   <div id="app">
     <!-- <login></login> -->
-    <json-style></json-style>
+    <!-- <json-style></json-style> -->
+    <mycv> </mycv>
+
   </div>
 </template>
 
 <script>
 // import login from './components/login/login'
-import jsonStyle from './components/blog-list/json-style'
+// import jsonStyle from './components/blog-list/json-style'
+import mycv from './components/remuse/myCV'
 
 export default {
   name: 'app',
   components: {
     // login,
-    jsonStyle
+    // jsonStyle
+    mycv
   }
 }
 </script>
