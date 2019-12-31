@@ -30,21 +30,26 @@
     </div>
     <!-- 实习/工作经历 -->
     <div class="intern">
-      <h3>工作/实习经历</h3>
+      <h3 class="me-title">工作/实习经历</h3>
       <div class="intern-list">
-        <el-tabs :tab-position="left" style="height: 200px;">
+        <el-tabs tab-position="left" stretch="true" >
           <el-tab-pane
             v-for="(item,index) in user.wordList"
-            :key="index"
-            :label="item.company">
-            {{ item.project }}
+            :key="index">
+            <div class="tab-left" slot="label">
+              <span>{{ item.company }}</span>
+              <br>
+              <span><i class="el-icon-date"></i>{{ item.startTime }}~{{ item.endTime }}</span>
+            </div>
+            <h4>职位：{{ item.position }}</h4>
+            <p>负责or参与的项目：{{ item.project }}</p>
           </el-tab-pane>
         </el-tabs>
       </div>
     </div>
     <!-- 项目经验 -->
     <div class="project">
-      <h3>项目</h3>
+      <h3  class="me-title">项目</h3>
       <div class="project-list">
         <ul>
           <li>
@@ -67,6 +72,7 @@
 
       </div>
     </div>
+    <el-backtop target=".remuse .page-component__scroll .el-scrollbar__wrap"></el-backtop>
   </div>
 </template>
 
@@ -84,7 +90,51 @@ export default {
         email: 'mjx171738749@foxmail.com',
         github: 'https://github.com/diudiudiu',
         aboutMe: `关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
-                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我`
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我`,
+        wordList: [
+          {
+            company: '北京世纪好未来教育科技有限公司',
+            project: `关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我`,
+            startTime: '2019-01-01',
+            endTime: '2019-01-01',
+            position: '前端实习生'
+          },
+          {
+            company: '北京世纪好未来教育科技有限公司',
+            project: `关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我`,
+            startTime: '2019-01-01',
+            endTime: '2019-01-01',
+            position: '前端实习生'
+          },
+          {
+            company: '北京世纪好未来教育科技有限公司',
+            project: `关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我`,
+            startTime: '2019-01-01',
+            endTime: '2019-01-01',
+            position: '前端实习生'
+          },
+          {
+            company: '北京世纪好未来教育科技有限公司',
+            project: `关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我`,
+            startTime: '2019-01-01',
+            endTime: '2019-01-01',
+            position: '前端实习生'
+          }
+        ]
       }
     }
   },
@@ -98,6 +148,7 @@ export default {
   background: url('../../img/pic2.jpg') no-repeat center;
   display: flex;
   justify-content: space-between;
+  border-bottom: 5px solid #E4E4E4;
 }
 .basics-photo{
   display: flex;
@@ -145,5 +196,51 @@ export default {
     width: 1rem;
     font-weight: bold;
   }
+}
+.me-title{
+  font-size: .4rem;
+  text-align: center;
+  margin-bottom: .35rem;
+  color: #10A7AF;
+  font-weight: bold;
+}
+.me-title::before,.me-title::after{
+  border: 4px double #c2c2c2;
+  width: 120px;
+  display: inline-block;
+  content: "";
+  margin: 9px 10px;
+}
+.about-me{
+  color: #464646;
+  line-height: 2.2em;
+  text-align: center;
+  font-size: .14rem;
+  margin: 0 auto .5rem;
+  width: 75%;
+  padding-top: .3rem;
+}
+.intern{
+  background: #f7f7f7;
+  padding-top: .3rem;
+  border-bottom: 5px solid #E4E4E4;
+}
+.intern-list{
+  line-height: 2.2em;
+  text-align: center;
+  font-size: .14rem;
+  margin: 0 auto;
+  padding-bottom: .5rem;
+  width: 90%;
+}
+/deep/ .el-tabs__item{
+  height: .7rem;
+}
+.tab-left{
+  line-height: 2em;
+}
+/deep/ .el-tab-pane{
+  text-align: left;
+  padding: .2rem;
 }
 </style>
