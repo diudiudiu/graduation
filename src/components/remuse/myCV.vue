@@ -32,7 +32,7 @@
     <div class="intern">
       <h3 class="me-title">工作/实习经历</h3>
       <div class="intern-list">
-        <el-tabs tab-position="left" stretch="true" >
+        <el-tabs tab-position="left" :stretch="true" >
           <el-tab-pane
             v-for="(item,index) in user.wordList"
             :key="index">
@@ -50,29 +50,59 @@
     <!-- 项目经验 -->
     <div class="project">
       <h3  class="me-title">项目</h3>
+      <p>{{user.projectInfo}}</p>
       <div class="project-list">
         <ul>
-          <li>
-            <div class="project-number"></div>
-            <div class="project-info"></div>
+          <li
+            v-for="(item,index) in user.projectList"
+            :key="index"
+            >
+            <div class="project-number">
+              <span>{{ index | number }}</span>
+            </div>
+            <div class="project-info">
+              <h4>{{ item.title }}</h4>
+              <p>{{ item.project }}</p>
+            </div>
           </li>
         </ul>
       </div>
     </div>
     <!-- 技能掌握 & 获奖信息  -->
     <div class="other">
-      <div class="skill">
-        <ul>
-          <li>
-
-          </li>
-        </ul>
+      <div class="other-list">
+        <div class="skill">
+          <h3 class="me-title-small">技能掌握</h3>
+          <ul>
+            <li 
+              v-for="(item,index) in user.skillList"
+              :key="index"
+              >
+              <el-progress
+                :text-inside="true"
+                :stroke-width="26"
+                :percentage="item.grade.percentage"
+                :color="item.grade.color"
+                >
+                {{ item.name }}
+              </el-progress>
+            </li>
+          </ul>
+        </div>
+        <div class="prize">
+          <h3 class="me-title-small">获奖信息</h3>
+          <ul>
+            <li
+              :v-for="(item,index) in prizeList"
+              :key="index"
+              >
+              
+              </li>
+          </ul>
+        </div>
       </div>
-      <div class="prize">
-
-      </div>
+      
     </div>
-    <el-backtop target=".remuse .page-component__scroll .el-scrollbar__wrap"></el-backtop>
   </div>
 </template>
 
@@ -134,11 +164,92 @@ export default {
             endTime: '2019-01-01',
             position: '前端实习生'
           }
+        ],
+        projectInfo: `关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我`,
+        projectList: [
+          {
+            title: 'asd',
+            project: `关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我`
+          },
+          {
+            title: 'asd',
+            project: `关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我`
+          },
+          {
+            title: 'asd',
+            project: `关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我`
+          },
+          {
+            title: 'asd',
+            project: `关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于
+                  我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我`
+          }
+        ],
+        skillList: [
+          {
+            name: 'HTML',
+            grade: 1
+          },
+          {
+            name: 'CSS',
+            grade: 2
+          },
+          {
+            name: 'JS',
+            grade: 3
+          },
+          {
+            name: 'VUE',
+            grade: 4
+          }
         ]
-      }
+      },
+      colors: [
+        {color: '#e6a23c', percentage: 25},
+        {color: '#5cb87a', percentage: 50},
+        {color: '#1989fa', percentage: 75},
+        {color: '#6f7ad3', percentage: 100}
+      ]
     }
   },
-  methods: {}
+  mounted(){
+    this.user.skillList.forEach( item => {
+      if(item.grade === 1){
+        item.grade = this.colors[0]
+      } else  if(item.grade === 2){
+        item.grade = this.colors[1]
+      } else  if(item.grade === 3){
+        item.grade = this.colors[2]
+      }else  if(item.grade === 4){
+        item.grade = this.colors[3]
+      }
+    })
+  },
+  methods: {},
+  filters: {
+    number: function (value) {
+      value++
+      if (value < 10){
+        return '0'+ value
+      } else{
+        return ''+value
+      }
+    }
+  }
 }
 </script>
 
@@ -204,12 +315,28 @@ export default {
   color: #10A7AF;
   font-weight: bold;
 }
+
 .me-title::before,.me-title::after{
-  border: 4px double #c2c2c2;
-  width: 120px;
+  border: .04rem double #c2c2c2;
+  width: 1.2rem;
   display: inline-block;
   content: "";
-  margin: 9px 10px;
+  margin: 0.09rem .1rem;
+}
+
+.me-title-small{
+  font-size: .3rem;
+  text-align: center;
+  margin-bottom: .35rem;
+  color: #10A7AF;
+  font-weight: bold;
+}
+.me-title-small::before,.me-title-small::after{
+  border: .04rem double #c2c2c2;
+  width: .6rem;
+  display: inline-block;
+  content: "";
+  margin: 0.09rem .1rem;
 }
 .about-me{
   color: #464646;
@@ -242,5 +369,83 @@ export default {
 /deep/ .el-tab-pane{
   text-align: left;
   padding: .2rem;
+}
+.project{
+  padding-top: .3rem;
+}
+.project>p{
+  width: 75%;
+  margin: 0 auto;
+  padding-bottom: .5rem;
+}
+.project-list{
+  width: 75%;
+  margin: 0 auto;
+  padding-bottom: .5rem;
+  li{
+    display: flex;
+    border-bottom: 1px solid #b1b1b1;
+    .project-number{
+      width: 30%;
+      border-right: 1px solid #b1b1b1;
+      position: relative;
+      span{
+        font-size: 1rem;
+        position: absolute;
+        top: 50%;
+        right: .2rem;
+        transform: translate(0,-50%);
+        font-style: italic;
+      }
+    }
+    .project-info{
+      width: 70%;
+      padding: .1rem .2rem;
+      h4{
+        text-align: left;
+        font-size: .22rem;
+        color: #10A7AF;
+        margin-bottom: .05rem;
+      }
+      p{
+        color: #464646;
+        line-height: 2.2em;
+        font-size: .14rem;
+      }
+    }
+  }
+  li:nth-child(even) {
+    flex-direction: row-reverse;
+    .project-number{
+      border-left: 1px solid #b1b1b1;
+      border-right: none;
+      span{
+        left: .2rem;
+        right: unset;
+      }
+    }
+    .project-info{
+      h4{
+        text-align: right;
+      }
+    }
+  }
+  li:last-of-type {
+    border-bottom: none;
+  }
+}
+.other-list{
+  width: 75%;
+  margin: .1rem auto;
+  display: flex;
+  .skill{
+    width: 50%;
+    li{
+      margin-bottom: .2rem;
+    }
+  }
+  .prize{
+    width: 50%;
+  }
 }
 </style>
