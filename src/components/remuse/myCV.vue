@@ -78,14 +78,18 @@
               v-for="(item,index) in user.skillList"
               :key="index"
               >
-              <el-progress
-                :text-inside="true"
-                :stroke-width="26"
-                :percentage="item.grade.percentage"
-                :color="item.grade.color"
-                >
-                {{ item.name }}
-              </el-progress>
+              <p>{{ item.name }}</p>
+              <div class="progress">
+                <el-progress
+                  :stroke-width="26"
+                  :percentage="item.grade.percentage"
+                  :color="item.grade.color"
+                  :show-text="false"
+                  >
+                </el-progress>
+                <span>{{ item.grade.text }}</span>
+              </div>
+              
             </li>
           </ul>
         </div>
@@ -93,10 +97,10 @@
           <h3 class="me-title-small">获奖信息</h3>
           <ul>
             <li
-              :v-for="(item,index) in prizeList"
+              v-for="(item,index) in user.prizeList"
               :key="index"
               >
-              
+              <span><i class="el-icon-medal-1"></i>{{ item.name }}</span>
               </li>
           </ul>
         </div>
@@ -199,6 +203,7 @@ export default {
                   我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我关于我`
           }
         ],
+
         skillList: [
           {
             name: 'HTML',
@@ -216,13 +221,27 @@ export default {
             name: 'VUE',
             grade: 4
           }
+        ],
+        prizeList: [
+          {
+            name: 'dfghjk'
+          },
+          {
+            name: 'dfghjk'
+          },
+          {
+            name: 'dfghjk'
+          },
+          {
+            name: 'dfghjk'
+          }
         ]
       },
       colors: [
-        {color: '#e6a23c', percentage: 25},
-        {color: '#5cb87a', percentage: 50},
-        {color: '#1989fa', percentage: 75},
-        {color: '#6f7ad3', percentage: 100}
+        {color: '#e6a23c', percentage: 25,text: '了解'},
+        {color: '#5cb87a', percentage: 50,text: '掌握'},
+        {color: '#1989fa', percentage: 75,text: '熟练'},
+        {color: '#6f7ad3', percentage: 100,text: '精通'}
       ]
     }
   },
@@ -372,6 +391,7 @@ export default {
 }
 .project{
   padding-top: .3rem;
+  border-bottom: 5px solid #E4E4E4;
 }
 .project>p{
   width: 75%;
@@ -441,11 +461,32 @@ export default {
   .skill{
     width: 50%;
     li{
-      margin-bottom: .2rem;
+      margin-bottom: .1rem;
+    }
+    li>p{
+      text-align: left;
+      padding-bottom: .05rem;
+      text-indent: 1em;
+      font-weight: bold;
     }
   }
   .prize{
     width: 50%;
+    ul{
+      margin-top: .5rem;
+    }
+    li{
+      margin-bottom: .2rem;
+      text-align: left;
+      padding-left: .5rem;
+    }
+  }
+  .progress{
+    display: flex;
+  }
+  /deep/ .el-progress{
+    width: 70%;
+    margin-right: .2rem;
   }
 }
 </style>

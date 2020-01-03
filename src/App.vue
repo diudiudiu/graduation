@@ -2,22 +2,24 @@
   <div id="app">
     <!-- <login></login> -->
     <!-- <json-style></json-style> -->
-    <mycv> </mycv>
-
+    <!-- <mycv> </mycv> -->
+    <bookmark></bookmark>
   </div>
 </template>
 
 <script>
 // import login from './components/login/login'
 // import jsonStyle from './components/blog-list/json-style'
-import mycv from './components/remuse/myCV'
+// import mycv from './components/remuse/myCV'
+import bookmark from './components/blog/card/bookmark'
 
 export default {
   name: 'app',
   components: {
     // login,
     // jsonStyle
-    mycv
+    // mycv
+    bookmark
   }
 }
 </script>
