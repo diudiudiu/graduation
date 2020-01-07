@@ -11,6 +11,7 @@
   "dependencies": {
     "core-js": "^3.3.2",
     "element-ui": "^2.12.0",
+    "marked": "^0.8.0",
     "node-sass": "^4.13.0",
     "sass-loader": "^8.0.0",
     "vue": "^2.6.10"
@@ -33,7 +34,9 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+      "no-console": "off"
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }

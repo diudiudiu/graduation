@@ -52,11 +52,13 @@ export default {
 
 <style lang="scss" scoped>
 .bookmark{
-  margin: 40px auto;
-  width: 5rem;
-  height: 3rem;
+  background: #ffffff;
+  margin-top: .25rem;
+  margin-left: .25rem;
   border: 1px solid #eeeeee;
   position: relative;
+  width: 3rem;
+  min-height: 2rem;
   border-radius: 7px;
   padding: 0 15px 5px 13px;
   color: #7A7A68;

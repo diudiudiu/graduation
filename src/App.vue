@@ -3,7 +3,10 @@
     <!-- <login></login> -->
     <!-- <json-style></json-style> -->
     <!-- <mycv> </mycv> -->
-    <bookmark></bookmark>
+    <!-- <bookmark></bookmark> -->
+    <!-- <article-body></article-body> -->
+    <comment></comment>
+
   </div>
 </template>
 
@@ -11,7 +14,10 @@
 // import login from './components/login/login'
 // import jsonStyle from './components/blog-list/json-style'
 // import mycv from './components/remuse/myCV'
-import bookmark from './components/blog/card/bookmark'
+// import bookmark from './components/blog/card/bookmark'
+// import articleBody from './components/blog/card/article-body'
+import comment from './components/common/comment'
+
 
 export default {
   name: 'app',
@@ -19,7 +25,9 @@ export default {
     // login,
     // jsonStyle
     // mycv
-    bookmark
+    // bookmark
+    // articleBody
+    comment
   }
 }
 </script>
