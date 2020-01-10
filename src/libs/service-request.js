@@ -1,7 +1,8 @@
 // import { resolve } from 'url'
-// import qs from 'qs'
+import qs from 'qs'
 import service from './service'
 import  api from './api'
+
 class Request {
   constructor () {
     // 其他模块会调用
@@ -10,20 +11,20 @@ class Request {
     // this.pptDownloadUrl = resolve(api.gateway, api.downloadPPT)
     this.api = api
   }
-  getSysTime () {
+  getArticle(params) {
     return service.request({
-      url: this.api.getSysTime,
-      method: 'get'
+      url: this.api.getArticle,
+      data: qs.stringify(params),
+      method: 'post'
     })
   }
-  // (未登陆)   此headers加字段 languageType 简繁的类型
+
   getLoginCitys (headers) {
     return service.request({
       url: this.api.getLoginCitys,
       headers
     })
   }
-  // (未登陆) 查询直播间联动数据  此headers加字段 languageType 简繁的类型
   getLiveRoomList (headers) {
     return service.request({
       url: this.api.getLiveRoomList,
@@ -31,49 +32,11 @@ class Request {
       headers
     })
   }
-  // login (params) {
-  //   let headers = {}
-  //   let data = params
-  //   if (store.getters.subjectType === 1) {
-  //     headers = { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' }
-  //     data = qs.stringify(params)
-  //     this.api = shuangshiApi
-  //   } else if (store.getters.subjectType === 2) {
-  //     this.api = zaixianApi
-  //   }
-  //   return service.request({
-  //     url: this.api.login,
-  //     method: 'post',
-  //     headers: headers,
-  //     data: data
-  //   })
-  // }
+  
   // 获取阿里云临时token
   getOSStmpToken () {
     return service.get(api.getOSStmpToken)
   }
-  // logout (params) {
-  //   return service.request({
-  //     url: this.api.logout,
-  //     method: 'post',
-  //     // transformRequest: [(data) => {
-  //     //   let ret = ''
-  //     //   for (let it in data) {
-  //     //     ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-  //     //   }
-  //     //   return ret
-  //     // }],
-  //     headers: {
-  //       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-  //     },
-  //     data: qs.stringify(params)
-  //   })
-  // }
-  // 获取新手引导信息
-  getBoot (params) {
-    return service.get(api.getBoot, { params: params })
-  }
-  // 更新老师引导信息
   addBoot (params) {
     return service.request({
       url: this.api.addBoot,
@@ -183,7 +146,5 @@ class Request {
       data: params
     })
   }
-  
-  
 }
 export default new Request()

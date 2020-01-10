@@ -1,11 +1,12 @@
-let gateway = ""
+// let gateway = ""
 
 let apiBase = {
-  gateway: gateway
+  gateway: 'http://47.104.87.40:9091',
+  getArticle: "/"
 }
 
 let api = { ...apiBase }
 
-export {
+export default{
   api
 }

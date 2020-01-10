@@ -10,6 +10,7 @@ module.exports = {
       .set("@", resolve("src"))
       .set("@assets", resolve("src/assets"))
       .set("~", resolve("src/components"))
+      .set("@libs", resolve("src/libs"))
       .set("@img", resolve("src/assets/img"));
   },
 

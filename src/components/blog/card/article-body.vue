@@ -6,9 +6,9 @@
     </div>
     <ul class="card">
       <li>
-        <bookmark>
+        <!-- <bookmark>
 
-        </bookmark>
+        </bookmark> -->
       </li>
     </ul>
   </div>
@@ -16,11 +16,14 @@
 
 <script>
 import marked from "marked"
-import bookmark from './bookmark'
+// import bookmark from './bookmark'
+// import ajax from '../../../libs/service-request'
+import qs from 'qs'
+
 
 export default {
   components:{
-    bookmark
+    // bookmark
   },
   data() {
     return {
@@ -37,8 +40,21 @@ export default {
     }
   },
   mounted(){
-    this.article = marked(this.art)
-    // console.log( ' ##### `Promise.all(iterable)`')
+    // let data = await ajax.getArticle({
+    //   name:'front'
+    // })
+    // console.error(data)
+    // this.article = marked(data)
+
+    this.axios.post('http://47.104.87.40:9091/', qs.stringify({name: "front"})
+        ,{
+      headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        }
+    }
+    ).then((response)=> {
+        this.article = marked(response.data)
+    })
   },
   methods: {
     
