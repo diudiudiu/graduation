@@ -11,7 +11,8 @@
     </el-input>
     <el-button 
       type="success"
-      :disabled="textarea"
+      :disabled="!textarea"
+      @click="comment(textarea,replyName)"
       >
       确认
     </el-button>
@@ -26,12 +27,17 @@ export default {
     }
   },
   props: {
-    
+    replyName: {
+      type: String,
+      default: ''
+    }
   },
   mounted(){
   },
   methods: {
-    
+    comment(textarea,replyName) {
+      this.$emit('comment', textarea, replyName)
+    }
   }
 }
 </script>

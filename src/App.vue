@@ -4,8 +4,8 @@
     <!-- <json-style></json-style> -->
     <!-- <mycv> </mycv> -->
     <!-- <bookmark></bookmark> -->
-    <article-body></article-body>
-    <!-- <comment></comment> -->
+    <!-- <article-body></article-body> -->
+    <comment></comment>
 
   </div>
 </template>
@@ -16,7 +16,7 @@
 // import mycv from './components/remuse/myCV'
 // import bookmark from './components/blog/card/bookmark'
 import articleBody from './components/blog/card/article-body'
-// import comment from './components/common/comment'
+import comment from './components/common/comment'
 
 
 export default {
@@ -26,8 +26,8 @@ export default {
     // jsonStyle
     // mycv
     // bookmark
-    articleBody
-    // comment
+    // articleBody,
+    comment
   }
 }
 </script>

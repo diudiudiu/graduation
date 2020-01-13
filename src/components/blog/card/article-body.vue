@@ -6,9 +6,9 @@
     </div>
     <ul class="card">
       <li>
-        <!-- <bookmark>
+        <bookmark>
 
-        </bookmark> -->
+        </bookmark>
       </li>
     </ul>
   </div>
@@ -16,7 +16,7 @@
 
 <script>
 import marked from "marked"
-// import bookmark from './bookmark'
+import bookmark from './bookmark'
 // import ajax from '../../../libs/service-request'
 import qs from 'qs'
 
@@ -46,7 +46,7 @@ export default {
     // console.error(data)
     // this.article = marked(data)
 
-    this.axios.post('http://47.104.87.40:9091/', qs.stringify({name: "front"})
+    this.axios.post('http://47.104.87.40:9091/', qs.stringify({name: "js"})
         ,{
       headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -63,11 +63,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// @import './markdownStyle/style4.css';
+
 .article{
   background: url(../../../assets/img/pattern.png);
   display: flex;
   .article-body{
     width: 70%;
+    text-align: left;
   }
   .card{
     width: 30%;
