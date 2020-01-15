@@ -5,18 +5,22 @@
       <el-avatar size="large" :src="circleUrl"></el-avatar>
     </div>
     <div class="info">
-      <div 
-        class="inner"
-        @click="replyName"
-        >
-        <span class="name">{{ name }}</span>
-        <span v-if="isReply"> 回复 <span class="name">{{ replyName }}</span> </span>
-        :
-        <span class="talk">{{ talk }}</span>
+      <div class="info-talk">
+        <div 
+          class="inner">
+          <span class="name">{{ name }}</span>
+          <span v-if="isReply"> 回复 <span class="name">{{ replyName }}</span> </span>
+          :
+          <span class="talk">{{ talk }}</span>
+        </div>
+        <span class="time">
+          {{time}}
+          <i 
+            class="el-icon-s-comment"
+            @click="getReplyName(name,true)"
+            ></i>
+        </span>
       </div>
-      <span class="time">
-        {{time}}
-      </span>
       <ul 
         v-if="replyList.length>0">
         <li
@@ -28,7 +32,9 @@
             :replyName="item.replyName"
             :talk="item.talk"
             :time="item.time"
-            :hasReply="false">
+            :hasReply="false"
+            @getReplyName="getReplyName" 
+            >
           </comment-inner>
         </li>
       </ul>
@@ -79,7 +85,9 @@ export default {
   mounted(){
   },
   methods: {
-    
+    getReplyName(name, inList){
+      this.$emit('getReplyName', name, inList)
+    }
   }
 }
 </script>
@@ -100,7 +108,19 @@ export default {
     .time{
       font-size: .12rem;
       color: #797979;
+      .el-icon-s-comment{
+        display: none;
+      }
+      .el-icon-s-comment：hover{
+        color: cornflowerblue;
+      }
     }
+  }
+    
+  .info-talk:hover  .time>.el-icon-s-comment{
+      display: inline-block;
+      margin-left: .2rem;
+      cursor: pointer;
   }
 }
 

@@ -13,13 +13,17 @@
             :time="item.time"
             :isReply="false"
             :replyList="item.replyList"
-            :hasReply="true">></commentInner>
+            :hasReply="true"
+            @getReplyName="getReplyName" 
+            ></commentInner>
         </li>
       </ul>
     </div>
     <commentArea
-      :comment="comment"
-      :holderplace="holderplace"></commentArea> 
+      ref="area"
+      @comment="comment"
+      :placeholder="placeholder"
+      :focus="focus"></commentArea> 
   </div>
 </template>
 
@@ -84,7 +88,8 @@ export default {
           ]
         }
       ],
-      holderpalce: ""
+      placeholder: "",
+      focus: false
     }
   },
   props: {
@@ -98,14 +103,19 @@ export default {
         name: this.username,
         talk: talk,
         replyName: replyName,
+        time: "2020.01.01 13:24"
       }
       // 提交评论
       
       //成功后从新拉取评论
     },
-    replyName(test){
-      test = '回复' + test
+
+    getReplyName(name, inList){
       //唤出评论栏
+      this.placeholder = inList ? '回复' + name : ''
+      this.focus = true
+      this.$refs.area.$el.children[0].children[0].focus()
+      
     }
   }
 }

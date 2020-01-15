@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <!-- <login></login> -->
+    <login></login>
     <!-- <json-style></json-style> -->
     <!-- <mycv> </mycv> -->
     <!-- <bookmark></bookmark> -->
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-// import login from './components/login/login'
+import login from './components/login/login'
 // import jsonStyle from './components/blog-list/json-style'
 // import mycv from './components/remuse/myCV'
 // import bookmark from './components/blog/card/bookmark'
@@ -22,7 +22,7 @@ import comment from './components/common/comment'
 export default {
   name: 'app',
   components: {
-    // login,
+    login,
     // jsonStyle
     // mycv
     // bookmark
