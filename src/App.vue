@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <top-header></top-header>
     <login></login>
     <!-- <json-style></json-style> -->
     <!-- <mycv> </mycv> -->
@@ -16,8 +17,8 @@ import login from './components/login/login'
 // import mycv from './components/remuse/myCV'
 // import bookmark from './components/blog/card/bookmark'
 import articleBody from './components/blog/card/article-body'
-import comment from './components/common/comment'
-
+import comment from './components/comment/comment'
+import topHeader from './components/common/top-header'
 
 export default {
   name: 'app',
@@ -27,7 +28,8 @@ export default {
     // mycv
     // bookmark
     // articleBody,
-    comment
+    comment,
+    topHeader
   }
 }
 </script>

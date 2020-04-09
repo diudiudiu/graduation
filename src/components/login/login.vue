@@ -25,18 +25,12 @@
           </div>
           
           <div class="input-group">
-            <el-input
-              v-model="username"
-              placeholder="密码"
-              show-password>
-            </el-input>
-            
-            <a class="link" href="">忘记密码?</a>
+            <el-input v-model="password" placeholder="密码" show-password></el-input>
           </div>
-          
-          <div class="submit">
-            登录
+          <div class="forgetPass">
+            <a class="forget" href="">忘记密码?</a>
           </div>
+          <div  class="submit" @click="login">登录</div>
 
           <div class="text-foot">
             还没有账号？点击
@@ -55,15 +49,15 @@
           <p>注册</p>
           <div class="input-group">
             <el-input
-              v-model="username"
-              placeholder="账号/用户名/邮箱"
+              v-model="newUser.email"
+              placeholder="邮箱"
               clearable>
             </el-input>
           </div>
           
           <div class="input-group">
             <el-input
-              v-model="username"
+              v-model="newUser.password"
               placeholder="密码"
               show-password>
             </el-input>
@@ -71,7 +65,7 @@
 
           <div class="input-group">
             <el-input
-              v-model="username"
+              v-model="passwordAgain"
               placeholder="确认密码"
               show-password>
             </el-input>
@@ -79,7 +73,7 @@
 
           <div class="input-group verif">
             <el-input
-              v-model="username"
+              v-model="newUser.verif"
               placeholder="验证码"
               >
             </el-input>
@@ -90,7 +84,9 @@
             </el-button>
           </div>
 
-          <div class="submit">
+          <div 
+            class="submit"
+            @click="register">
             注册
           </div>
 
@@ -107,6 +103,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   data (){
     return {
@@ -115,6 +113,7 @@ export default {
       newUser: {
         username: '',
         password: '',
+        verif: ''
       },
       passwordAgain: '',
       loginStatus: true,
@@ -125,10 +124,18 @@ export default {
 
     }
   },
+  destroyed(){
+    if(this.statusTimer){
+      clearTimeout(this.statusTimer)
+    }
+    if(this.interTime){
+      clearInterval(this.interTime)
+    }
+  },
   methods: {
     goRegister(){
       this.loginStatus = !this.loginStatus
-      setTimeout( ()=> {
+      this.statusTimer = setTimeout( ()=> {
         this.loginTextStatus = !this.loginTextStatus
       },500)
       this.logoAnimated = true
@@ -138,17 +145,38 @@ export default {
         return
       }else{
         this.sent = true
-        let interTime = setInterval(() => {
+        this.interTime = setInterval(() => {
           if(this.timer>0){
             this.timer--
           }else{
-            clearInterval(interTime)
+            clearInterval(this.interTime)
             this.timer = 60
             this.sent=false
           }
         }, 1000);
       }
       
+    },
+    async login() {
+      //前端校验
+      if (!this.username){
+        this.$message.error("账号不能为空"); 
+        return
+      }
+      if (!this.password){
+        this.$message.error("密码不能为空"); 
+        return 
+      }
+
+      // todo 请求提交
+
+    },
+    async register() {
+      if (this.passwordAgain !== this.newUser.password){
+        this.$message.error('两次密码输入不一致'); 
+      }
+
+      // todo 提交 如果已经注册 返回 toast
     }
   }
 }
@@ -234,8 +262,9 @@ a{
         outline: 0;
         width: 1.6rem;
       }
-      /deep/ .el-button{
-        width: 1.5rem;
+      /deep/ .el-button>span{
+        display: inline-block;
+        width: 1rem;
       }
     }
     .text-foot{
@@ -299,8 +328,19 @@ a{
     cursor: pointer;
     transition: all 1s;
   }
-  
-      
+  .submit:hover{
+    color: #000;
+  }
+  .forget{
+    float: right;
+    cursor: pointer;
+  }
+  .forgetPass{
+    overflow: hidden;
+    margin-bottom: .15rem;
+    margin-top: -.05rem;
+
+  }
   .text-foot{
     text-align: center;
     padding: .1rem;
