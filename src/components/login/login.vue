@@ -124,6 +124,18 @@ export default {
 
     }
   },
+  computed: {
+    ...mapGetters([
+      'loginUser',
+      'loginUserId',
+      'loginUserRealName',
+      'gpuEnable',
+      'codeLoginConfig'
+    ]),
+    ...mapGetters({
+      'type': 'subjectType'
+    }),
+  },
   destroyed(){
     if(this.statusTimer){
       clearTimeout(this.statusTimer)

@@ -1,34 +1,36 @@
 <template>
   <div id="app">
     <top-header></top-header>
-    <login></login>
+    <!-- <login></login> -->
     <!-- <json-style></json-style> -->
     <!-- <mycv> </mycv> -->
     <!-- <bookmark></bookmark> -->
     <!-- <article-body></article-body> -->
-    <comment></comment>
-
+    <!-- <comment></comment> -->
+    <cv-group></cv-group>
   </div>
 </template>
 
 <script>
-import login from './components/login/login'
+// import login from './components/login/login'
 // import jsonStyle from './components/blog-list/json-style'
 // import mycv from './components/remuse/myCV'
 // import bookmark from './components/blog/card/bookmark'
 import articleBody from './components/blog/card/article-body'
-import comment from './components/comment/comment'
+// import comment from './components/comment/comment'
 import topHeader from './components/common/top-header'
+import cvGroup from './components/info-table/cv-group'
 
 export default {
   name: 'app',
   components: {
-    login,
+    // login,
     // jsonStyle
     // mycv
     // bookmark
     // articleBody,
-    comment,
+    // comment,
+    cvGroup,
     topHeader
   }
 }
