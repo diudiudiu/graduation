@@ -13,25 +13,13 @@
           <el-form-item label="github" prop="github">
             <el-input v-model="user.github"></el-input>
           </el-form-item>
-          
-          <!-- <el-upload
-            class="avatar-uploader"
-            action="https://jsonplaceholder.typicode.com/posts/"
-            :show-file-list="false"
-            :on-success="handleAvatarSuccess"
-            :before-upload="beforeAvatarUpload">
-            <img v-if="basis.imageUrl" :src="basis.imageUrl" class="avatar">
-            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-          </el-upload> -->
           <el-form-item label="手机" prop="phone">
             <el-input v-model="basis.phone"></el-input>
             <el-checkbox :disabled="!basis.phone" class="hideType" v-model="basis.phoneType" label="保密" name="phoneType"></el-checkbox>
           </el-form-item>
-          
           <el-form-item label="邮箱" prop="email" required>
             <el-input disabled type="email" v-model="user.email"></el-input>
           </el-form-item>
-          
           <el-form-item>
             <el-button type="primary" @click="submitBasisForm">保存</el-button>
             <el-button @click="close">取消</el-button>

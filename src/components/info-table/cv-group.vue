@@ -9,7 +9,7 @@
         <span v-if="type === 'aboutMe'">个人评价</span>
         <span v-if="type === 'prize'">获奖经历</span>
         <span v-if="type === 'article'">发表文章</span>
-        <i class="close el-icon-close"></i>
+        <i class="close el-icon-close" @click="close"></i>
       </div>
       <div class="form-info">
         <!-- 基础信息 -->
@@ -17,26 +17,22 @@
           <el-form-item label="姓名" prop="name" required>
             <el-input class="basis-name" v-model="basis.name"></el-input>
             <el-select class="sexType" v-model="basis.sex">
-              <el-option label="男" value="0"></el-option>
-              <el-option label="女" value="1"></el-option>
+              <el-option label="男" value="男"></el-option>
+              <el-option label="女" value="女"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="github" prop="github">
             <el-input v-model="basis.github"></el-input>
           </el-form-item>
-          
-          <!-- <el-upload
-            class="avatar-uploader"
-            action="https://jsonplaceholder.typicode.com/posts/"
-            :show-file-list="false"
-            :on-success="handleAvatarSuccess"
-            :before-upload="beforeAvatarUpload">
-            <img v-if="basis.imageUrl" :src="basis.imageUrl" class="avatar">
-            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-          </el-upload> -->
           <el-form-item label="手机" prop="phone">
             <el-input v-model="basis.phone"></el-input>
             <el-checkbox :disabled="!basis.phone" class="hideType" v-model="basis.phoneType" label="保密" name="phoneType"></el-checkbox>
+          </el-form-item>
+          <el-form-item label="毕业院校" prop="school" required>
+            <el-input v-model="basis.school"></el-input>
+          </el-form-item>
+          <el-form-item label="意向岗位" prop="position" required>
+            <el-input v-model="basis.position"></el-input>
           </el-form-item>
           <el-form-item label="微信" prop="weChat">
             <el-input v-model="basis.weChat"></el-input>
@@ -48,21 +44,27 @@
           </el-form-item>
           <el-form-item label="最高学历" prop="grade" required>
             <el-select v-model="basis.grade" placeholder="请选择最高学历">
-              <el-option label="小学" value="0"></el-option>
-              <el-option label="初中" value="1"></el-option>
-              <el-option label="高中" value="2"></el-option>
-              <el-option label="专科" value="3"></el-option>
-              <el-option label="本科" value="4"></el-option>
-              <el-option label="硕士" value="5"></el-option>
-              <el-option label="博士" value="6"></el-option>
-              <el-option label="博士后" value="7"></el-option>
+              <el-option label="小学" value="小学"></el-option>
+              <el-option label="初中" value="初中"></el-option>
+              <el-option label="高中" value="高中"></el-option>
+              <el-option label="专科" value="专科"></el-option>
+              <el-option label="本科" value="本科"></el-option>
+              <el-option label="硕士" value="硕士"></el-option>
+              <el-option label="博士" value="博士"></el-option>
+              <el-option label="博士后" value="博士后"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="邮箱" prop="email" required>
             <el-input type="email" v-model="basis.email"></el-input>
           </el-form-item>
           <el-form-item label="毕业时间" prop="gradeDate" required>
-            <el-date-picker type="date" placeholder="选择日期" v-model="basis.gradeDate"></el-date-picker>
+            <el-date-picker 
+              type="date" 
+              placeholder="选择日期" 
+              v-model="basis.gradeDate" 
+              format="yyyy 年 MM 月 dd 日"
+              value-format="yyyy-MM-dd">
+            </el-date-picker>
           </el-form-item>
         </el-form>
         <!-- 工作经历 -->
@@ -165,22 +167,6 @@
 export default {
   data() {
     return {
-      basis: {
-        name: '',
-        sex: '0',
-        phone: '',
-        grade: '',
-        email: '',
-        gradeDate: '',
-        imageUrl: '',
-        phoneType: true,
-        weChat: '',
-        weChatType: true,
-        qq: '',
-        github: '',
-        qqType: true,
-        emailType: false
-      },
       wordList: [
         {
           name: '',
@@ -201,38 +187,35 @@ export default {
           name:''
         }
       ],
-      
-      article: '',
-      type: 'word'
+      projectList: [
+        {title: '', describe: ''}
+      ],
+      article: ''
     }
+  },
+  props: {
+    type: {
+      type: String,
+      default: 'basis'
+    },
+    basis: {
+      type: Object,
+      default: ()=>{}
+    }
+    
   },
   computed: {
 
   },
   methods: {
-     handleAvatarSuccess(res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw);
-      },
-      beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
-
-        if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!');
-        }
-        if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!');
-        }
-      return isJPG && isLt2M;
-    },
     submitBasisForm(){
       if(!this.basis.name || !this.basis.email || !this.basis.grade || !this.basis.gradeDate){
         this.$message.error('请填写必填项')
       }
-      
+      console.error(this.basis)
     },
     close(){
-
+      this.$emit('close')
     },
     addItem(){
       if(this.type ==='prize'){
@@ -296,7 +279,10 @@ export default {
   height: 100%;
   left: 0;
   top: 0;
-  position: absolute;
+  position: fixed;
+  z-index: 101;
+  overflow: auto;
+  overflow-x: hidden;
 }
 .cv-group{
   width: 8.2rem;

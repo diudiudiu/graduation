@@ -7,7 +7,8 @@
     <!-- <bookmark></bookmark> -->
     <!-- <article-body></article-body> -->
     <!-- <comment></comment> -->
-    <cv-group></cv-group>
+    <!-- <cv-group></cv-group> -->
+    <cv-form></cv-form>
   </div>
 </template>
 
@@ -19,7 +20,9 @@
 import articleBody from './components/blog/card/article-body'
 // import comment from './components/comment/comment'
 import topHeader from './components/common/top-header'
-import cvGroup from './components/info-table/cv-group'
+// import cvGroup from './components/info-table/cv-group'
+import cvForm from './components/remuss-form/cv-form'
+
 
 export default {
   name: 'app',
@@ -30,7 +33,8 @@ export default {
     // bookmark
     // articleBody,
     // comment,
-    cvGroup,
+    // cvGroup,
+    cvForm,
     topHeader
   }
 }
