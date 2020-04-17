@@ -1,6 +1,6 @@
 <template>
   <div class="cv-form" >
-    <div class="basis">
+    <div class="basis" @click.self="openCard('basis')">
       <el-upload
         class="avatar-uploader"
         action="https://jsonplaceholder.typicode.com/posts/"
@@ -32,18 +32,76 @@
       <div class="editors"><span @click="openCard('basis')">编辑</span></div>
     </div>
     <ul>
-      <li class="list-item" v-for="(item,index) in attrList" :key="index">
+      <li class="list-item" v-for="(item,index) in attrList" :key="index" @click="openCard(item.type)">
         <h5>{{item.title}}</h5>
-        <div class="editor-group"><span @click="openCard(item.type)">编辑</span> <span @click="deleteItem(index)">删除</span></div>
-        
+        <div class="editor-group"><span @click.stop="openCard(item.type)">编辑</span> <span @click.stop="deleteItem(index)">删除</span></div>
+        <div v-if="item.type==='word'">
+          <ul>
+            <li class="word-item" v-for="(itm,i) in wordList" :key="i">
+              <div class="word">
+                <span>{{itm.name}}</span>
+                <span v-if="itm.wordDate.length!==0">{{itm.wordDate[0]}} — {{itm.wordDate[1]}}</span>
+                <span>{{itm.position}}</span>
+              </div>
+              <p v-if="itm.describe">
+                {{itm.describe}}
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div v-if="item.type==='project'">
+          <ul>
+            <li class="word-item" v-for="(itm,i) in projectList" :key="i">
+              <div class="word">
+                <span>{{itm.title}}</span>
+              </div>
+              <p v-if="itm.describe">
+                {{itm.describe}}
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div class="about-me" v-if="item.type==='aboutMe'">
+          <p>{{aboutMe}}</p>
+        </div>
+        <div v-if="item.type==='skill'">
+          <ul>
+            <li class="word-item" v-for="(itm,i) in skillList" :key="i">
+              <div class="word">
+                <span>{{itm.name}}</span> 
+                <span v-if="itm.name">{{itm.degree}}</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div v-if="item.type==='prize'">
+          <ul>
+            <li class="word-item" v-for="(itm,i) in prizeList" :key="i">
+              <div class="word">
+                <span>{{itm.name}}</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="article" v-if="item.type==='article'">
+          <p>
+            {{article}}
+          </p>
+        </div>
+
       </li>
     </ul>
     <cv-group  
       v-if="cvStatus" 
       :type="cvType" 
       :basis="basis"
+      :wordList="wordList"
+      :skillList="skillList"
+      :aboutMe="aboutMe"
+      :prizeList="prizeList"
+      :projectList="projectList"
+      :article="article"
       @close="closeCard"
-      
       >
     </cv-group>
   </div>
@@ -76,6 +134,30 @@ export default {
         qqType: true,
         school: '沈阳工业大学'
       },
+      wordList: [
+        {
+          name: '好未来公司',
+          position: 'web前端',
+          wordDate: [],
+          describe: 'hgjhkjlk;lhgjhkjlk;lhgjhkjlk;lhgjhkjlk;lhgjhkjlk;lhgjhkjlk;lhgjhkjlk;lhgjhkjlk;lhgjhkjlk;lhgjhkjlk;l'
+        }
+      ],
+      skillList: [
+        {
+          name: 'javascript',
+          degree: '精通'
+        }
+      ],
+      aboutMe: 'sdfghjklmnbvcxxdfghj',
+      prizeList: [
+        {
+          name: '三好学生'
+        }
+      ],
+      projectList: [
+        {title: '未来黑板', describe: '是对方过后就看了看见面会脑哥人'}
+      ],
+      article: '就看了看见面会脑哥人',
       attrList: [
         {title:'工作经历',type:'word'},
         {title:'项目经历',type:'project'},
@@ -98,7 +180,7 @@ export default {
   },
   methods: {
     handleAvatarSuccess(res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw)
+        this.basis.imageUrl = URL.createObjectURL(file.raw)
     },
     beforeAvatarUpload(file) {
         const isJPG = file.type === 'image/jpeg'
@@ -174,13 +256,14 @@ export default {
       height: 1.2rem;
       line-height: 1.2rem;
       text-align: center;
-      border-radius: 1rem;
+      border-radius: 1.2rem;
       border: 1px dashed #8c939d;
     }
     .avatar {
       width: 1.2rem;
       height: 1.2rem;
       display: block;
+      border-radius: 1.2rem;
     }
     .basis-info{
       margin-left: .2rem;
@@ -225,6 +308,23 @@ export default {
   }
   .list-item:hover .editor-group{
     display: block;
+  }
+  .list-item .word-item{
+    text-align: left;
+    .word{
+      margin-bottom: .1rem;
+    }
+    span{
+      margin-right: .2rem;
+    }
+    p{
+      word-break: break-all;
+    }
+  }
+  .article,.about-me{
+    text-align: left;
+    word-break: break-all;
+
   }
   .editor-group{
     font-size: 14px;

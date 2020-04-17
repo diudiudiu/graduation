@@ -70,17 +70,20 @@
         <!-- 工作经历 -->
         <el-form v-if="type === 'word'" ref="word" label-width="100px" >
           <div v-for="(item,i) in wordList" :key="i">
-            <el-form-item label="公司名称" prop="name" required>
+            <el-form-item label="公司名称" required>
               <el-input class="basis-name" v-model="item.name"></el-input>
               <span class="delete" v-if="wordList.length>1" @click="deleteItem(i)">删除</span>
             </el-form-item>
-            <el-form-item label="职位" prop="position" required>
+            <el-form-item label="职位" required>
               <el-input v-model="item.position"></el-input>
             </el-form-item>
-            <el-form-item label="任职时间" prop="wordDate" required>
+            <el-form-item label="任职时间"  required>
               <el-date-picker v-model="item.wordDate" type="monthrange" range-separator="至" 
                 start-placeholder="开始月份"
-                end-placeholder="结束月份">
+                end-placeholder="结束月份"
+                format="yyyy 年 MM 月"
+                value-format="yyyy.MM"
+                >
               </el-date-picker>
             </el-form-item>
             <el-form-item label="描述" prop="describe">
@@ -98,10 +101,10 @@
             <el-form-item label="技能掌握" prop="skill" >
               <el-input class="skill-name" v-model="item.name" ></el-input>
               <el-select :disabled="!item.name" v-model="item.degree" placeholder="程度">
-                <el-option label="了解" value="0"></el-option>
-                <el-option label="掌握" value="1"></el-option>
-                <el-option label="熟悉" value="2"></el-option>
-                <el-option label="精通" value="3"></el-option>
+                <el-option label="了解" value="了解"></el-option>
+                <el-option label="掌握" value="掌握"></el-option>
+                <el-option label="熟悉" value="熟悉"></el-option>
+                <el-option label="精通" value="精通"></el-option>
               </el-select>
               <span class="delete-float" v-if="skillList.length>1" @click="deleteItem(i)">删除</span>
             </el-form-item>
@@ -167,30 +170,7 @@
 export default {
   data() {
     return {
-      wordList: [
-        {
-          name: '',
-          position: '',
-          wordDate: '',
-          describe: ''
-        }
-      ],
-      skillList:[
-        {
-          name: '',
-          degree: '0'
-        }
-      ],
-      aboutMe: '',
-      prizeList: [
-        {
-          name:''
-        }
-      ],
-      projectList: [
-        {title: '', describe: ''}
-      ],
-      article: ''
+      
     }
   },
   props: {
@@ -201,18 +181,54 @@ export default {
     basis: {
       type: Object,
       default: ()=>{}
+    },
+    wordList:{
+      type: Array,
+      default: ()=>[]
+    },
+    skillList: {
+      type: Array,
+      default: ()=>[]
+    },
+    aboutMe: {
+      type: String,
+      default: ''
+    },
+    prizeList: {
+      type: Array,
+      default: ()=>[]
+    },
+    projectList: {
+      type: Array,
+      default: ()=>[]
+    },
+    article: {
+      type: String,
+      default: ''
     }
-    
   },
   computed: {
 
   },
   methods: {
     submitBasisForm(){
-      if(!this.basis.name || !this.basis.email || !this.basis.grade || !this.basis.gradeDate){
-        this.$message.error('请填写必填项')
+      // todo 验证
+      if(this.type === 'basis'){
+        if(!this.basis.name || !this.basis.email || !this.basis.grade || !this.basis.gradeDate){
+          this.$message.error('请填写必填项')
+        }
       }
-      console.error(this.basis)
+      // if(this.type === 'word'){
+      //   if(!this.basis.name || !this.basis.email || !this.basis.grade || !this.basis.gradeDate){
+      //     this.$message.error('请填写必填项')
+      //   }
+      // }
+      // if(this.type === 'basis'){
+      //   if(!this.basis.name || !this.basis.email || !this.basis.grade || !this.basis.gradeDate){
+      //     this.$message.error('请填写必填项')
+      //   }
+      // }
+      this.close()
     },
     close(){
       this.$emit('close')
@@ -228,7 +244,7 @@ export default {
         this.skillList.push({name:'',degree:'0'})
       }
       if(this.type ==='word'){
-        this.wordList.push({ name: '', position: '', wordDate: '', describe: '' })
+        this.wordList.push({ name: '', position: '', wordDate: [], describe: '' })
       }
     },
     deleteItem(index){
