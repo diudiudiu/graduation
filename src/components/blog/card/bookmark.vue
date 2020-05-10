@@ -28,7 +28,12 @@
 export default {
   data() {
     return {
-      article: {}
+      article: {
+        type: 'article',
+        title: 'asdsafas',
+        time: '2020-20-02',
+        text: 'sdfghjklertyui'
+      }
     }
   },
   props: {

@@ -1,40 +1,55 @@
 <template>
   <div id="app">
     <top-header></top-header>
+    <router-view></router-view>
     <!-- <login></login> -->
     <!-- <json-style></json-style> -->
+    <!-- <photo-style></photo-style> -->
     <!-- <mycv> </mycv> -->
     <!-- <bookmark></bookmark> -->
     <!-- <article-body></article-body> -->
     <!-- <comment></comment> -->
     <!-- <cv-group></cv-group> -->
-    <cv-form></cv-form>
+    <!-- <cv-form></cv-form> -->
+    <!-- <user-top></user-top>   -->
+    <!-- <follow></follow> -->
+    <!-- <not-find></not-find> -->
+
   </div>
 </template>
 
 <script>
 // import login from './components/login/login'
 // import jsonStyle from './components/blog-list/json-style'
+// import photoStyle from './components/blog-list/photo-style'
 // import mycv from './components/remuse/myCV'
 // import bookmark from './components/blog/card/bookmark'
-import articleBody from './components/blog/card/article-body'
+// import articleBody from './components/blog/card/article-body'
 // import comment from './components/comment/comment'
 import topHeader from './components/common/top-header'
 // import cvGroup from './components/info-table/cv-group'
-import cvForm from './components/remuss-form/cv-form'
+// import cvForm from './components/remuss-form/cv-form'
+// import userTop from './components/common/user-top'
+// import follow from './components/info-table/follow'
+// import notFind from './components/404/not-find'
+
 
 
 export default {
   name: 'app',
   components: {
     // login,
-    // jsonStyle
+    // jsonStyle,
     // mycv
-    // bookmark
+    // bookmark,
     // articleBody,
     // comment,
     // cvGroup,
-    cvForm,
+    // cvForm,
+    // userTop,
+    // notFind,
+    // photoStyle,
+    // follow,
     topHeader
   }
 }
@@ -85,4 +100,7 @@ q:before,q:after {
 abbr,acronym {
   border: 0;
 }
+/* .el-message{
+  top: 40px;
+} */
 </style>

@@ -104,6 +104,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import qs from 'qs'
 
 export default {
   data (){
@@ -124,18 +125,12 @@ export default {
 
     }
   },
-  computed: {
-    ...mapGetters([
-      'loginUser',
-      'loginUserId',
-      'loginUserRealName',
-      'gpuEnable',
-      'codeLoginConfig'
-    ]),
-    ...mapGetters({
-      'type': 'subjectType'
-    }),
-  },
+  // computed: {
+  //   ...mapGetters([
+  //     'isOnline',
+  //   ]),
+    
+  // },
   destroyed(){
     if(this.statusTimer){
       clearTimeout(this.statusTimer)
@@ -152,10 +147,11 @@ export default {
       },500)
       this.logoAnimated = true
     },
-    sendEmail(){
+    async sendEmail(){
       if(this.sent) {
         return
       }else{
+        // const res = await
         this.sent = true
         this.interTime = setInterval(() => {
           if(this.timer>0){
@@ -181,7 +177,28 @@ export default {
       }
 
       // todo 请求提交
-
+      this.axios.post('http://47.104.87.40:9092/login', qs.stringify({
+        username: this.username,
+        password: this.password
+      }),{
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        }
+      }).then((res)=> {
+        if(res.data.code === 0){
+          console.error('成功',res)
+          sessionStorage.setItem('token',res.data.token);
+          this.$router.push({path: '/'})
+          // this.isOnline = true
+        }else {
+          console.error('error',res.data.msg)
+          this.$message({
+            type: 'error',
+            message: res.data.msg,
+            offset: 60
+          })
+        }
+      })
     },
     async register() {
       if (this.passwordAgain !== this.newUser.password){

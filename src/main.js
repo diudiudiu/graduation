@@ -4,18 +4,19 @@ import ElementUI from 'element-ui';
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Vuex from 'vuex'
-import VueRouter from 'vue-router'
+import store from './store/store'
 
-Vue.use(VueRouter)
 Vue.use(Vuex)
 Vue.prototype.$http = axios
 Vue.use(VueAxios, axios)
 import 'element-ui/lib/theme-chalk/index.css';
 
-Vue.config.productionTip = false
+import router from "./router/router"  
 
 Vue.use(ElementUI)
 
 new Vue({
+  router,
+  store,
   render: h => h(App),
 }).$mount('#app')

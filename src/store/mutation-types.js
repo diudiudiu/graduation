@@ -1,4 +1,4 @@
-export const SET_CURRENTVIEW = 'SET_CURRENTVIEW'
+export const LOGIN = 'LOGIN'
 export const LOGOUT = ' MUT_LOGOUT'
 export const USER_LOGINED = 'MUT_USER_LOGINED'
 export const SET_LOGIN_TYPE = 'MUT_SET_LOGIN_TYPE'

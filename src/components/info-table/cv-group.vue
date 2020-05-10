@@ -214,20 +214,36 @@ export default {
     submitBasisForm(){
       // todo 验证
       if(this.type === 'basis'){
-        if(!this.basis.name || !this.basis.email || !this.basis.grade || !this.basis.gradeDate){
+        if(!(this.basis.name && this.basis.email && this.basis.grade && this.basis.gradeDate)){
           this.$message.error('请填写必填项')
+          return
         }
       }
-      // if(this.type === 'word'){
-      //   if(!this.basis.name || !this.basis.email || !this.basis.grade || !this.basis.gradeDate){
-      //     this.$message.error('请填写必填项')
-      //   }
-      // }
-      // if(this.type === 'basis'){
-      //   if(!this.basis.name || !this.basis.email || !this.basis.grade || !this.basis.gradeDate){
-      //     this.$message.error('请填写必填项')
-      //   }
-      // }
+      if(this.type === 'word'){
+        this.wordList.forEach((item)=>{
+          if(!(item.name && item.position && item.wordDate.length===0)){
+            console.error(item)
+            this.$message.error('请填写必填项')
+            return
+          }
+        })
+      }
+      if(this.type === 'skill'){
+        this.skillList.forEach((item)=>{
+          if(!item.name){
+            this.$message.error('请填写必填项')
+            return
+          }
+        })
+      }
+      if(this.type === 'prize'){
+        this.prizeList.forEach((item)=>{
+          if(!item.name){
+            this.$message.error('请填写必填项')
+            return
+          }
+        })
+      }
       this.close()
     },
     close(){
@@ -241,7 +257,7 @@ export default {
         this.projectList.push({title: '', describe: ''})
       }
       if(this.type ==='skill'){
-        this.skillList.push({name:'',degree:'0'})
+        this.skillList.push({name:'',degree:'了解'})
       }
       if(this.type ==='word'){
         this.wordList.push({ name: '', position: '', wordDate: [], describe: '' })

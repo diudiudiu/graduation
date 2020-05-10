@@ -122,6 +122,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.comment{
+  width: 12rem;
+  margin: .5rem auto;
+  .comment-item{
+    border: 1px solid #eee;
+    padding:.2rem;
+    border-radius: 6px;
+  }
+}
 
 </style>

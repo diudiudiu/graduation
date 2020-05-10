@@ -7,9 +7,8 @@ module.exports = {
   chainWebpack: config => {
     //路径配置
     config.resolve.alias
-      .set("@", resolve("src"))
       .set("@assets", resolve("src/assets"))
-      .set("~", resolve("src/components"))
+      .set("@components", resolve("src/components"))
       .set("@libs", resolve("src/libs"))
       .set("@img", resolve("src/assets/img"));
   },
